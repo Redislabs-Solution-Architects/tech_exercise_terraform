@@ -145,3 +145,21 @@ ls -d $PWD/$SERVICE_ACCOUNT_NAME.json
 gcloud iam service-accounts delete $SERVICE_ACCOUNT_NAME@$PROJECT.iam.gserviceaccount.com
 rm -rf blah-sa123.json
 ```
+
+## Command line shortcuts
+Plan/apply using environment variables:
+```
+export TF_VAR_hiring_manager_name=brad
+export TF_VAR_candidate_name=simon
+export TF_VAR_candidate_public_key=`cat id_rsa_SI.pub`
+terraform plan
+terraform apply --auto-approve --state-out=$TF_VAR_candidate_name.tfstate
+```
+
+Plan/apply using cli only:
+```
+terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`"
+terraform apply -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" --auto-approve --state-out=simon.tfstate
+...
+terraform destroy --auto-approve --state=simon.tfstate
+``` 
