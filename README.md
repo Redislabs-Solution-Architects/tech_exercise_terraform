@@ -154,12 +154,13 @@ export TF_VAR_candidate_name=simon
 export TF_VAR_candidate_public_key=`cat id_rsa_SI.pub`
 terraform plan
 terraform apply --auto-approve --state-out=$TF_VAR_candidate_name.tfstate
+terraform destroy --auto-approve -lock=false -state-out=$TF_VAR_candidate_name.tfstate
 ```
 
 Plan/apply using cli only:
 ```
-terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`"
-terraform apply -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" --auto-approve --state-out=simon.tfstate
+terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" id_rsa_SI.pub`" 
+terraform apply -var="hiring_manager_name=brad" -var="candidate_name=simon" id_rsa_SI.pub`" --auto-approve --state-out=simon.tfstate
 ...
-terraform destroy --auto-approve --state=simon.tfstate
+terraform destroy --auto-approve -lock=false  -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" -state-out=simon.tfstate
 ``` 
