@@ -160,7 +160,8 @@ terraform destroy --auto-approve -state=$TF_VAR_candidate_name.tfstate
 Plan/apply using cli only:
 ```
 terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" 
-terraform apply --auto-approve --state-out=simon.tfstate -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`"  --state-out=simon.tfstate
+terraform apply --auto-approve --state-out=simon.tfstate -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" 
 ...
 terraform destroy --auto-approve -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" -state=simon.tfstate
+terraform destroy --auto-approve --state=simon.tfstate
 ``` 
