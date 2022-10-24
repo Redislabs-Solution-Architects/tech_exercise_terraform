@@ -115,7 +115,7 @@ Provide these IPs to the candidate over email.
 Find the `<candidate_name>.tfstate` file, run `terraform destroy --state=<candidate_name>.tfstate`.
 
 ```
-$ terraform destroy --auto-approve --state-out=bobross.tfstate
+$ terraform destroy --auto-approve --state=bobross.tfstate
 ...< 1 minute max>
 ...
 google_compute_network.gcp-network: Still destroying... [id=projects/central-beach-194106/global/networks/brad-sa-candidate-bobross-network, 10s elapsed]
@@ -154,13 +154,14 @@ export TF_VAR_candidate_name=simon
 export TF_VAR_candidate_public_key=`cat id_rsa_SI.pub`
 terraform plan
 terraform apply --auto-approve --state-out=$TF_VAR_candidate_name.tfstate
-terraform destroy --auto-approve -lock=false -state-out=$TF_VAR_candidate_name.tfstate
+terraform destroy --auto-approve -state=$TF_VAR_candidate_name.tfstate
 ```
 
 Plan/apply using cli only:
 ```
-terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" id_rsa_SI.pub`" 
-terraform apply -var="hiring_manager_name=brad" -var="candidate_name=simon" id_rsa_SI.pub`" --auto-approve --state-out=simon.tfstate
+terraform plan -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" 
+terraform apply --auto-approve --state-out=simon.tfstate -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" 
 ...
-terraform destroy --auto-approve -lock=false  -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" -state-out=simon.tfstate
+terraform destroy --auto-approve -var="hiring_manager_name=brad" -var="candidate_name=simon" -var="candidate_public_key=`cat id_rsa_SI.pub`" -state=simon.tfstate
+terraform destroy --auto-approve --state=simon.tfstate
 ``` 
