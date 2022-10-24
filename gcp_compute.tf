@@ -34,10 +34,12 @@ resource "google_compute_instance" "gcp-vm" {
   name         = "${var.hiring_manager_name}-sa-candidate-${var.candidate_name}-vm${count.index + 1}"
   machine_type = var.gcp_instance_type
   zone         = data.google_compute_zones.available.names[0]
+  labels = { "skip_deletion" = "yes"}
 
   metadata = {
     ssh-keys = "${var.candidate_public_key_username}:${var.candidate_public_key}"
     block-project-ssh-keys = true
+
   }
 
   boot_disk {
