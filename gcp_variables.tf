@@ -59,7 +59,7 @@ variable "gcp_instance_type" {
 
 variable "gcp_disk_image" {
   description = "Boot disk for gcp_instance_type."
-  default     = "projects/ubuntu-os-cloud/global/images/family/ubuntu-1804-lts"
+  default     = "projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts"
 }
 
 variable "gcp_network_cidr" {
